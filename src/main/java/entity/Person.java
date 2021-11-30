@@ -5,6 +5,10 @@ import java.util.List;
 
 @Entity
 @Table(name="person")
+@NamedQueries(value={
+        @NamedQuery(name = "MaxPuntosDados", query = "select pg.firstName, pg.lastName from HousePoints hp INNER JOIN hp.personByGiver pg group by hp.points order by hp.points desc"),
+        @NamedQuery(name = "MaxPuntosRecibidos", query = "select pr.firstName, pr.lastName from HousePoints hp INNER JOIN hp.personByReceiver pr group by hp.points order by hp.points desc")
+})
 public class Person {
     private int id;
     private String firstName;

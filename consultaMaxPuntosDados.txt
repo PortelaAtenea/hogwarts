@@ -1,0 +1,7 @@
+select p.first_name, p.last_name, sum(hp.points) as suma_puntos
+	from person as p
+    inner join house_points as hp on p.id = hp.giver
+    group by hp.giver
+    having suma_puntos >= all (select sum(points)
+								from house_points
+                                group by receiver);

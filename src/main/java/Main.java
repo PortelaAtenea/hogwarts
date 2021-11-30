@@ -1,27 +1,26 @@
+import entity.Person;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.persistence.Query;
-import java.util.List;
+import javax.persistence.TypedQuery;
 
-public class main {
+public class Main {
+
     public static void main(String[] args) {
-        try {
 
+        try {
 
             EntityManagerFactory enf = Persistence.createEntityManagerFactory("default");
             EntityManager em = enf.createEntityManager();
             em.getTransaction().begin();
 
-
-
-/*
-            Query q = em.createNamedQuery("consultar_trabajadores", Employee.class);
-            List<Employee> l =q.getResultList();
-            for(Employee emp : l){
-                System.out.println(emp);
-            }*/
+            TypedQuery<Person> query = em.createNamedQuery("MaxPuntosDados", Person.class);
+            TypedQuery<Person> query2 = em.createNamedQuery("MaxPuntosRecibidos", Person.class);
+            Person pGiver = query.getSingleResult();
+            Person pReceiver = query2.getSingleResult();
             commit(em, enf);
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
