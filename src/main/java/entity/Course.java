@@ -51,15 +51,7 @@ public class Course {
         return result;
     }
 
-    @ManyToOne
-    @JoinColumn (name = "teacher_id")
-    public Person getTeacher() {
-        return teacher;
-    }
 
-    public void setTeacher(Person teacher) {
-        this.teacher = teacher;
-    }
 
     @ManyToMany(cascade = CascadeType.DETACH)
     @JoinTable(name="enrollment",
@@ -69,5 +61,14 @@ public class Course {
 
     public void setPeople(List<Person> people) {
         this.people = people;
+    }
+    @ManyToOne
+    @JoinColumn (name = "teacher_id")
+    public Person getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(Person teacher) {
+        this.teacher = teacher;
     }
 }
